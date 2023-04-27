@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vamos_cozinhar/screens/categories_screen.dart';
+import 'package:vamos_cozinhar/utils/app_routes.dart';
 
 import 'screens/categories_meals_screen.dart';
 
@@ -12,18 +13,20 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'DeliMeals',
       theme: ThemeData(
-          primarySwatch: Colors.pink,
-          accentColor: Colors.amber,
-          fontFamily: 'Raleway',
-          canvasColor: Color.fromRGBO(255, 254, 229, 1),
-          textTheme: ThemeData.light().textTheme.copyWith(
-                  titleLarge: TextStyle(
+        primarySwatch: Colors.pink,
+        accentColor: Colors.amber,
+        fontFamily: 'Raleway',
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleLarge: TextStyle(
                 fontSize: 20,
                 fontFamily: 'RobotoCondensed',
-              ))),
-      home: CategoriesScreen(),
+              ),
+            ),
+      ),
       routes: {
-        '/categories-meals': (context) => CategoriesMealsScreen(),
+        AppRoutes.HOME: (context) => CategoriesScreen(),
+        AppRoutes.CATEGORIES_MEALS: (context) => CategoriesMealsScreen(),
       },
     );
   }

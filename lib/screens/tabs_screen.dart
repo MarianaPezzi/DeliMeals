@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vamos_cozinhar/components/main_drawer.dart';
+import 'package:vamos_cozinhar/models/meal.dart';
 import 'package:vamos_cozinhar/screens/categories_screen.dart';
 import 'package:vamos_cozinhar/screens/favorite_screen.dart';
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({super.key});
+  final List<Meal> favoriteMeals;
+  const TabsScreen(this.favoriteMeals);
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -12,10 +14,19 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedScreenIndex = 0;
-  final List<Map<String, dynamic>> _screens = [
-    {'title': 'Lista de Categorias', 'screen': CategoriesScreen()},
-    {'title': 'Meus Favoritos', 'screen': FavoriteScreen()},
-  ];
+  List<Map<String, dynamic>>? _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      {'title': 'Lista de Categorias', 'screen': CategoriesScreen()},
+      {
+        'title': 'Meus Favoritos',
+        'screen': FavoriteScreen(widget.favoriteMeals),
+      },
+    ];
+  }
 
   _selectScreen(int index) {
     setState(() {
@@ -27,10 +38,10 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_screens[_selectedScreenIndex]['title']),
+        title: Text(_screens?[_selectedScreenIndex]['title']),
       ),
       drawer: MainDrawer(),
-      body: _screens[_selectedScreenIndex]['screen'],
+      body: _screens?[_selectedScreenIndex]['screen'],
       bottomNavigationBar: BottomNavigationBar(
           onTap: _selectScreen,
           backgroundColor: Theme.of(context).primaryColor,
@@ -50,3 +61,38 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

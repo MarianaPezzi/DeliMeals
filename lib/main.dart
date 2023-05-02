@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vamos_cozinhar/data/dummy_data.dart';
+import 'package:vamos_cozinhar/models/meal.dart';
 import 'package:vamos_cozinhar/screens/meal_detail_screen.dart';
 import 'package:vamos_cozinhar/screens/settings_screen.dart';
 import 'package:vamos_cozinhar/screens/tabs_screen.dart';
@@ -7,7 +9,14 @@ import 'screens/categories_meals_screen.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +36,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.HOME: (context) => TabsScreen(),
-        AppRoutes.CATEGORIES_MEALS: (context) => CategoriesMealsScreen(),
+        AppRoutes.CATEGORIES_MEALS: (context) =>
+            CategoriesMealsScreen(_availableMeals),
         AppRoutes.MEAL_DETAIL: (context) => MealDetailScreen(),
         AppRoutes.SETTINGS: (context) => SettingsScreen(),
       },
